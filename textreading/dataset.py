@@ -12,13 +12,11 @@ def showImage(image: int):
     plt.imshow(mnist.images[image])
 
 def showAllImages():
-    # this function does not work, idk why, this function isnt important, so i dont care
-    
-    fig, axes = plt.subplots(2, 10, figsize=(16, 6))
+    _, axes = plt.subplots(nrows=1, ncols=10, figsize=(16, 4))
+    for ax, image, label in zip(axes, mnist.images, mnist.target):
+        ax.set_axis_off()
+        ax.imshow(image, cmap=plt.cm.gray_r, interpolation='nearest')
+        ax.set_title('Training: %i' % label)
 
-    for i in range(20):
-        axes[i//10, i %10].imshow(mnist.images[i], cmap='gray');
-        axes[i//10, i %10].axis('off')
-        axes[i//10, i %10].set_title(f"target: {mnist.target[i]}")
-        
-    plt.tight_layout()
+if __name__ == '__main__':
+    showAllImages()
